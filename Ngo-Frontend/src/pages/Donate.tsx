@@ -13,6 +13,7 @@ import { Heart, CreditCard, Smartphone, Building, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { donationService } from "@/services/api";
 import { Textarea } from "@/components/ui/textarea";
+import axios from "axios";
 
 const Donate = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const Donate = () => {
     paymentMethod: "",
     message: ""
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { toast } = useToast();
@@ -50,22 +51,22 @@ const Donate = () => {
 
     try {
       setIsSubmitting(true);
-      
+
       // Map the form values to the API expected format
       const donationData = {
         full_name: formData.name,
         email: formData.email,
         cause: formData.cause === 'education' ? 'Education for All' :
-               formData.cause === 'plantation' ? 'Green Plantation' :
-               formData.cause === 'slum-development' ? 'Slum Development' : 'General Fund',
+          formData.cause === 'plantation' ? 'Green Plantation' :
+            formData.cause === 'slum-development' ? 'Slum Development' : 'General Fund',
         amount: parseFloat(formData.amount),
         payment_method: formData.paymentMethod === 'upi' ? 'UPI' :
-                        formData.paymentMethod === 'card' ? 'Card' : 'Bank',
+          formData.paymentMethod === 'card' ? 'Card' : 'Bank',
         message: formData.message || null
       };
-      
+
       await donationService.createDonation(donationData);
-      
+
       toast({
         title: "Thank You!",
         description: "Your donation has been processed. You will receive a confirmation email shortly.",
@@ -82,6 +83,9 @@ const Donate = () => {
       });
     } catch (error) {
       console.error('Donation submission error:', error);
+      if (axios.isAxiosError(error) && error.response && error.response.data) {
+        console.error('Validation Errors:', error.response.data);
+      }
       toast({
         title: "Submission Failed",
         description: "There was an error processing your donation. Please try again later.",
@@ -99,7 +103,7 @@ const Donate = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="py-24 bg-gradient-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -110,7 +114,7 @@ const Donate = () => {
             Make a Donation
           </h1>
           <p className="font-opensans text-xl text-muted-foreground max-w-3xl mx-auto">
-            Your generosity can create lasting change in communities around the world. 
+            Your generosity can create lasting change in communities around the world.
             Every donation, big or small, makes a meaningful difference.
           </p>
         </div>
@@ -243,10 +247,10 @@ const Donate = () => {
                       />
                     </div>
 
-                    <Button 
-                      type="submit" 
-                      size="lg" 
-                      className="w-full" 
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -295,8 +299,8 @@ const Donate = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="font-opensans text-sm text-muted-foreground">
-                    Green Heart Collective is a registered 501(c)(3) nonprofit organization. 
-                    Your donation is tax-deductible to the extent allowed by law. 
+                    Green Heart Collective is a registered 501(c)(3) nonprofit organization.
+                    Your donation is tax-deductible to the extent allowed by law.
                     You will receive a tax receipt via email.
                   </p>
                 </CardContent>
