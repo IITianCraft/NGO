@@ -83,9 +83,9 @@ const Donate = () => {
       });
     } catch (error) {
       console.error('Donation submission error:', error);
-      if (axios.isAxiosError(error) && error.response && error.response.data) {
-        console.error('Validation Errors:', error.response.data);
-      }
+      // if (axios.isAxiosError(error) && error.response && error.response.data) {
+      //   console.error('Validation Errors:', error.response.data);
+      // }
       toast({
         title: "Submission Failed",
         description: "There was an error processing your donation. Please try again later.",

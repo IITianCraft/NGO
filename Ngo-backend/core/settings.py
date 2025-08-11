@@ -29,7 +29,9 @@ DEBUG = True
 ALLOWED_HOSTS = [
     # ... any other hosts (e.g., 'localhost', '127.0.0.1')
     'ngo-8apy.onrender.com',
-    'ngo-azure-delta.vercel.app' # You also might need to add your Vercel URL
+    'ngo-azure-delta.vercel.app', # You also might need to add your Vercel URL
+    'localhost',
+    '127.0.0.1'
 ]
 
 # Application definition
