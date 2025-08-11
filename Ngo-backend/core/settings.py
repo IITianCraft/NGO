@@ -25,8 +25,12 @@ SECRET_KEY = 'django-insecure-(8rrx2*1svfq6)_c16b*^u!&*!d4kk4leq4)z@g-^5yg&0l4=h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    # ... any other hosts (e.g., 'localhost', '127.0.0.1')
+    'ngo-8apy.onrender.com',
+    'ngo-azure-delta.vercel.app' # You also might need to add your Vercel URL
+]
 
 # Application definition
 
