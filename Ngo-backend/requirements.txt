@@ -1,0 +1,6 @@
+Django
+djangorestframework
+python-decouple
+psycopg2-binary  # Or another database adapter
+django-cors-headers
+# Add any other libraries your project usespip install -r requirements.txt
