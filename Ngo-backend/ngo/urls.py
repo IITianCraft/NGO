@@ -12,7 +12,6 @@ router.register(r'contact-messages', ContactMessageViewSet)
 # ]
 
 
-
 urlpatterns = [
     # Include the router URLs for other apps
     path('', include(router.urls)),
