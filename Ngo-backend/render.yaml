@@ -1,10 +1,7 @@
-# render.yaml
-
 databases:
   - name: ngo_db
     databaseName: homefinder
     user: postgres
-    # The password and host are configured via environment variables
 
 services:
   - type: web
@@ -17,21 +14,10 @@ services:
         fromDatabase:
           name: ngo_db
           property: connectionString
-      - key: SECRET_KEY
+      - key: DJANGO_SECRET_KEY
         generateValue: true
       - key: WEB_CONCURRENCY
         value: 4
-      - key: DB_NAME
-        value: homefinder
-      - key: DB_USER
-        value: postgres
-      - key: DB_PASSWORD
-        value: shravani1234
-      - key: DB_HOST
-        value: localhost
-      - key: DB_PORT
-        value: 5432
-
-# This part is crucial!
-    preBuildCommand: "python3 manage.py makemigrations donation"
-    postBuildCommand: "python3 manage.py migrate"
+    postDeployCommand: |
+      python manage.py makemigrations
+      python manage.py migrate

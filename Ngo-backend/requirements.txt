@@ -4,3 +4,5 @@ python-decouple==3.8
 psycopg2-binary==2.9.10
 django-cors-headers==4.7.0
 gunicorn
+dj-database-url
+docutils
