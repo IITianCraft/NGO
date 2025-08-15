@@ -6,3 +6,4 @@ django-cors-headers==4.7.0
 gunicorn
 dj-database-url
 docutils
+whitenoise==6.9.0
